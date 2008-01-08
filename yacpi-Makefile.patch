@@ -1,0 +1,55 @@
+diff -Nur b.yacpi-3.0.1/Makefile n.yacpi-3.0.1/Makefile
+--- b.yacpi-3.0.1/Makefile	2007-10-30 17:39:43.000000000 +0100
++++ n.yacpi-3.0.1/Makefile	2008-01-08 23:43:24.389577906 +0100
+@@ -5,8 +5,8 @@
+ 
+ BIN     = yacpi
+ prefix  = /usr/local
+-INSPATH = ${prefix}/bin/
+-CFLAGS  = -O2 -Wall -g -DVERSION=\"${VERSION}\"
++bindir = ${prefix}/bin
++override CFLAGS += -Wall -DVERSION=\"${VERSION}\"
+ CC      = cc
+ DOCPATH = ${prefix}/share/doc/yacpi
+ MANPATH = ${prefix}/share/man/man1
+@@ -18,11 +18,10 @@
+ 
+ .c.o :
+ 	@echo CC $<
+-	@${CC} -c ${CFLAGS} $<
++	@${CC} $(CPPFLAGS) -c ${CFLAGS} $<
+ 
+ all : options ${OBJ_yacpi} ${OBJ_get_cpu}
+-	@${CC} -Wall get_cpu.o yacpi.o -o ${BIN} -lncurses -lacpi
+-	@strip ${BIN}
++	@${CC} $(LDFLAGS) get_cpu.o yacpi.o -o ${BIN} -lncurses -lacpi
+ 	@echo built yacpi
+ 
+ dist : clean
+@@ -40,17 +39,17 @@
+ 	@echo "BIN    = ${BIN}"
+ 
+ install :
+-	@mkdir -p ${DOCPATH}
+-	@mkdir -p ${INSPATH}
+-	@mkdir -p ${MANPATH}
+-	install -m644 CHANGELOG README THANKS COPYING ${DOCPATH}
+-	install -m644 yacpi.1 ${MANPATH}
+-	install ${BIN} ${INSPATH}
++	@mkdir -p $(DESTDIR)${DOCPATH}
++	@mkdir -p $(DESTDIR)${bindir}
++	@mkdir -p $(DESTDIR)${MANPATH}
++	install -m644 CHANGELOG README THANKS COPYING $(DESTDIR)${DOCPATH}
++	install -m644 yacpi.1 $(DESTDIR)${MANPATH}
++	install ${BIN} $(DESTDIR)${bindir}
+ 
+ uninstall :
+-	rm -f ${INSPATH}${BIN}
+-	rm -rf ${DOCPATH}
+-	rm -f ${MANPATH}/yacpi.1*
++	rm -f $(DESTDIR)${bindir}/${BIN}
++	rm -rf $(DESTDIR)${DOCPATH}
++	rm -f $(DESTDIR)${MANPATH}/yacpi.1*
+ 
+ clean :
+ 	rm -f ${BIN}
