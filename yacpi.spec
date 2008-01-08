@@ -11,6 +11,7 @@ Patch0:		%{name}-Makefile.patch
 URL:		http://www.ngolde.de/yacpi.html
 BuildRequires:	libacpi-devel
 BuildRequires:	ncurses-devel
+ExclusiveArch:	%{ix86} %{x8664} ia64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
