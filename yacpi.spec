@@ -1,5 +1,5 @@
-Summary:	ncurses based acpi monitor for text mode
-#Summary(pl.UTF-8):	-
+Summary:	ncurses based ACPI monitor for text mode
+Summary(pl.UTF-8):	Oparty na ncurses tekstowy monitor ACPI
 Name:		yacpi
 Version:	3.0.1
 Release:	1
@@ -15,14 +15,21 @@ ExclusiveArch:	%{ix86} %{x8664} ia64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-yacpi (yet another configuration and power interface) is an ncurses
+yacpi (Yet Another Configuration and Power Interface) is an ncurses
 based ACPI monitoring program for notebooks. There is also a text-only
 output so it is possible to include it in scripts. It displays various
 ACPI information like battery status, temperature, charging circuits
-and AC status. Additionally it displays CPU govenor and current
+and AC status. Additionally it displays CPU governor and current
 frequency.
 
-#description -l pl.UTF-8
+%description -l pl.UTF-8
+yacpi (Yet Another Configuration and Power Interface, czyli jeszcze
+jeden interfejs do konfiguracji i zasilania) to oparty na ncurses
+program do monitorowania ACPI dla notebooków. Ma także wyjście
+tekstowe, więc nadaje się do używania w skryptach. Wyświetla różne
+informacje ACPI, takie jak stan baterii, temperatura, prąd ładowania i
+stan zasilania AC. Ponadto wyświetla stan regulacji procesora i jego
+aktualną częstotliwość.
 
 %prep
 %setup -q
